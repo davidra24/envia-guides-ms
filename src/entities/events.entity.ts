@@ -1,6 +1,6 @@
 import { status_guides } from './guide.entity';
 
-export interface EventsEntity {
+export interface EventEntity {
   id_event: string;
   id_guide: string;
   date_event: Date;

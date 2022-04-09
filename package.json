@@ -24,6 +24,7 @@
     "pg-hstore": "^2.3.4",
     "qrcode": "^1.5.0",
     "sequelize": "^6.18.0",
+    "sequelize-views-support": "^1.2.2",
     "uint8-to-base64": "^0.2.0",
     "uuid": "^8.3.2"
   },

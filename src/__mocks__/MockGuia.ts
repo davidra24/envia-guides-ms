@@ -20,7 +20,7 @@ export const MockGuia: GuideGenerationEntity = {
     first_name_person: 'Juan',
     last_name_person: 'Pérez',
     phone_person: '3215748526',
-    document_person: 125987463,
+    document_person: '125987463',
     postal_code_person: 255874
   },
   addressee: {
@@ -28,14 +28,15 @@ export const MockGuia: GuideGenerationEntity = {
     last_name_person: 'Pardo',
     address_person: 'Calle falsa 123',
     phone_person: '3214447896',
-    document_person: 8854713,
+    document_person: '8854713',
     postal_code_person: 998566
   },
   guide_person: {
     origin_city: 'Bogotá',
     destination_city: 'Medellin',
     destination_regional: 'Medellin',
-    document_sender: 125987463,
-    document_addressee: 8854713
+    document_sender: '125987463',
+    document_addressee: '8854713',
+    address_addressee: 'calle falsa #123'
   }
 };
