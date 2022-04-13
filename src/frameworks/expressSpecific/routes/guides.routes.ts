@@ -50,6 +50,26 @@ router.get('/:id_guide', async (request: Request, response: Response) => {
   }
 });
 
+router.put(
+  '/pdf-update/:id_guide',
+  async (request: Request, response: Response) => {
+    const {
+      params: { id_guide },
+      body: { data }
+    } = request;
+    try {
+      const guides = await guideTransactionController.updateGuide({
+        id_guide,
+        data
+      });
+      successResponseCommon(response, guides);
+    } catch (error) {
+      console.log(error);
+      errorResponseCommon(response, error.message);
+    }
+  }
+);
+
 router.put('/:id_guide', async (request: Request, response: Response) => {
   const {
     params: { id_guide },

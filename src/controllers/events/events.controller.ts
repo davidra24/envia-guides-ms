@@ -27,6 +27,14 @@ export class EventController {
       console.log(error);
     }
   };
+  getManyEventsByIdGuide = async (id_guide: string) => {
+    try {
+      const { getManyEventsByIdGuideDB } = eventRepository;
+      return await getManyEventsByIdGuideDB(id_guide);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   updateEvent = async (event: EventEntity, id_event: string) => {
     try {
       const { updateEventDB } = eventRepository;

@@ -1,4 +1,3 @@
-import { Model } from 'sequelize/types';
 import { PersonEntity } from '../../entities';
 import { personModelDB } from '../db';
 

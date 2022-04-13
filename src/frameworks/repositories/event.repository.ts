@@ -11,6 +11,12 @@ export const eventRepository = {
         id_event
       }
     }),
+  getManyEventsByIdGuideDB: async (id_guide: string) =>
+    await eventModelDB.findAll({
+      where: {
+        id_guide
+      }
+    }),
   updateEventDB: async (eventEntity: EventEntity, id_event: string) =>
     await eventModelDB.update(
       { ...eventEntity },

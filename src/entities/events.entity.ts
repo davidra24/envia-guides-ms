@@ -6,5 +6,5 @@ export interface EventEntity {
   date_event: Date;
   previous_status: status_guides;
   new_status: status_guides;
-  additional_notes: string;
+  additional_notes?: string;
 }

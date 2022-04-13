@@ -1,12 +1,14 @@
-import { GuideEntity } from '../../entities';
+import { v4 } from 'uuid';
+import { EventEntity, GuideEntity, status_guides } from '../../entities';
 import { guideRepository } from '../../frameworks';
+import { eventRepository } from '../../frameworks/repositories/event.repository';
 
 export class GuideController {
   constructor() {}
-  createGuide = (guideEntity: GuideEntity) => {
+  createGuide = async (guideEntity: GuideEntity) => {
     try {
       const { createGuideDB } = guideRepository;
-      return createGuideDB({ ...guideEntity });
+      return await createGuideDB({ ...guideEntity });
     } catch (error) {
       console.log(error);
     }

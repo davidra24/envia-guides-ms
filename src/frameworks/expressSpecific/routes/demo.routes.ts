@@ -1,4 +1,5 @@
 import { Router, Response, Request } from 'express';
+import { Kafka } from 'kafkajs';
 import { encode } from 'uint8-to-base64';
 import { GuideTransactionController } from '../../../controllers';
 import { DATA_TYPE_PDF } from '../../../utilities';
