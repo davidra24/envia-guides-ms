@@ -1,5 +1,6 @@
 import { v4 } from 'uuid';
 import { GuideGenerationEntity, status_guides } from '../../entities';
+import { U2B64 } from '../../utilities';
 import { generateEvent } from '../../utilities/event.manager.utility';
 import { EventController } from '../events/events.controller';
 import { GuidePersonController } from '../guidePerson/guide_person.controller';
@@ -7,7 +8,7 @@ import { PeopleController } from '../people/people.controller';
 import { GuideController } from './guide.controller';
 import { createPDFGuideController } from './guidePDFController';
 
-const GUIA_NAME = 'guia_editable';
+export const GUIA_NAME = 'guia_editable';
 
 export class GuideTransactionController {
   guideController: GuideController;
@@ -22,11 +23,12 @@ export class GuideTransactionController {
   }
   createGuide = async (data: GuideGenerationEntity) => {
     try {
-      const id_guide = v4();
-      const generatedPDF = await createPDFGuideController({
+      const id_guide = data.id ? data.id : v4();
+      let generatedPDF: Uint8Array | string = await createPDFGuideController({
         sourceGuide: GUIA_NAME,
         guideCreation: { ...data, id: id_guide }
       });
+      generatedPDF = U2B64(generatedPDF);
 
       const { guide, sender, addressee, guide_person } = data;
 
@@ -61,17 +63,22 @@ export class GuideTransactionController {
   };
   updateGuide = async ({
     id_guide,
-    data
+    data,
+    pdf
   }: {
     id_guide: string;
     data: GuideGenerationEntity;
+    pdf: boolean;
   }) => {
     try {
-      const id_guide = v4();
-      const generatedPDF = await createPDFGuideController({
-        sourceGuide: GUIA_NAME,
-        guideCreation: { ...data, id: id_guide }
-      });
+      let generatedPDF: Uint8Array | string = null;
+      if (pdf) {
+        generatedPDF = await createPDFGuideController({
+          sourceGuide: GUIA_NAME,
+          guideCreation: { ...data, id: id_guide }
+        });
+        generatedPDF = U2B64(generatedPDF);
+      }
 
       const { guide, guide_person } = data;
 
@@ -84,17 +91,16 @@ export class GuideTransactionController {
         events.forEach((evt) => {
           last_status =
             /** @ts-ignore */
-            last_status < evt.status_guide ? evt.status_guide : last_status;
+            last_status < evt.new_status ? evt.new_status : last_status;
         });
       }
 
-      const event = generateEvent(
-        id_guide,
-        last_status,
-        data.guide.status_guide
-      );
+      const event = generateEvent(id_guide, last_status, guide.status_guide);
 
-      await this.guideController.updateGuide(guide, id_guide);
+      const updatedGuide = await this.guideController.updateGuide(
+        guide,
+        id_guide
+      );
 
       await this.eventController.createEvent({ ...event });
 
@@ -103,7 +109,8 @@ export class GuideTransactionController {
         id_guide
       );
 
-      return generatedPDF;
+      if (pdf) return generatedPDF;
+      else return updatedGuide;
     } catch (error) {
       console.log(error);
       return null;

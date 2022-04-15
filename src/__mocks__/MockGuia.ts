@@ -33,10 +33,12 @@ export const MockGuia: GuideGenerationEntity = {
   },
   guide_person: {
     origin_city: 'Bogotá',
+    origin_regional: 'Bogotá',
     destination_city: 'Medellin',
     destination_regional: 'Medellin',
     document_sender: '125987463',
     document_addressee: '8854713',
-    address_addressee: 'calle falsa #123'
+    address_addressee: 'calle falsa #123',
+    assigned_route: ''
   }
 };

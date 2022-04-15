@@ -46,6 +46,9 @@ export const guideViewModelDB = sequelize.define(
     other_cost_guide: {
       type: Sequelize.NUMBER
     },
+    origin_regional: {
+      type: Sequelize.TEXT
+    },
     origin_city: {
       type: Sequelize.TEXT
     },
@@ -61,6 +64,9 @@ export const guideViewModelDB = sequelize.define(
     document_sender: {
       type: Sequelize.TEXT
     },
+    assigned_route: {
+      type: Sequelize.TEXT
+    },
     first_name_sender: {
       type: Sequelize.TEXT
     },
@@ -74,7 +80,7 @@ export const guideViewModelDB = sequelize.define(
       type: Sequelize.TEXT
     },
     postal_code_sender: {
-      type: Sequelize.TEXT
+      type: Sequelize.NUMBER
     },
     document_addressee: {
       type: Sequelize.TEXT
@@ -92,7 +98,7 @@ export const guideViewModelDB = sequelize.define(
       type: Sequelize.TEXT
     },
     postal_code_addressee: {
-      type: Sequelize.TEXT
+      type: Sequelize.NUMBER
     },
     createdAt: {
       field: 'createdat',

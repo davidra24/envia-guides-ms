@@ -1,5 +1,7 @@
 import { Sequelize } from 'sequelize';
 import { config } from 'dotenv';
+import fs from 'fs';
+import path from 'path';
 
 config();
 
@@ -23,10 +25,18 @@ export class ConnectionDB {
       });
       await this.sequelize.authenticate();
       console.log('Conected!');
+      await this.createDatabase();
     } catch (error) {
       console.log(error);
     }
     config();
+  };
+
+  createDatabase = async () => {
+    const dir = path.join(__dirname, 'db.sql');
+    const sql_string = fs.readFileSync(dir, 'utf8');
+    await this.sequelize.query(sql_string);
+    console.log('Database created');
   };
 
   public static getInstance(): ConnectionDB {

@@ -7,5 +7,11 @@ export const guideViewRepository = {
       where: {
         id_guide
       }
+    }),
+  getAllGuidesByStatusDB: async (status_guide: number) =>
+    await guideViewModelDB.findAll({
+      where: {
+        status_guide
+      }
     })
 };

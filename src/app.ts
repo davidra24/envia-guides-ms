@@ -1,6 +1,10 @@
 import express, { Router, Request, Response } from 'express';
-import { routes } from './frameworks/expressSpecific/routes';
+import routes from './frameworks/expressSpecific/routes';
 import { config } from 'dotenv';
+import swaggerUI from 'swagger-ui-express';
+import swaggerJSDoc from 'swagger-jsdoc';
+import { options as swaggerOptions } from './swagger.options';
+
 import cors from 'cors';
 
 config();
@@ -19,6 +23,9 @@ router.get('/', (request: Request, response: Response) => {
 });
 
 app.use(router);
-app.listen(port);
+app.use('/api', routes);
 
-routes(app);
+const specs = swaggerJSDoc(swaggerOptions);
+app.use('/docs', swaggerUI.serve, swaggerUI.setup(specs));
+
+app.listen(port);

@@ -30,6 +30,9 @@ export const guidePersonModelDB = sequelize.define(
         key: 'document_person'
       }
     },
+    origin_regional: {
+      type: Sequelize.TEXT
+    },
     origin_city: {
       type: Sequelize.TEXT
     },
@@ -40,6 +43,9 @@ export const guidePersonModelDB = sequelize.define(
       type: Sequelize.TEXT
     },
     address_addressee: {
+      type: Sequelize.TEXT
+    },
+    assigned_route: {
       type: Sequelize.TEXT
     },
     createdAt: {
