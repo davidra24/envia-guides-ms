@@ -1,11 +1,12 @@
 import express, { Router, Request, Response } from 'express';
 import routes from './frameworks/expressSpecific/routes';
-import { config } from 'dotenv';
 import swaggerUI from 'swagger-ui-express';
 import swaggerJSDoc from 'swagger-jsdoc';
-import { options as swaggerOptions } from './swagger.options';
-
 import cors from 'cors';
+import { config } from 'dotenv';
+import { options as swaggerOptions } from './swagger.options';
+import { kafkaGuide } from './frameworks/expressSpecific/mq';
+import { ErrorHandler } from './frameworks/common/logs/errorHandler.logs';
 
 config();
 
@@ -17,10 +18,13 @@ app.use(cors());
 app.use(express.json());
 app.use(express.text());
 app.use(express.urlencoded({ extended: false }));
+app.use(ErrorHandler);
 
 router.get('/', (request: Request, response: Response) => {
   response.send('Hola mundo');
 });
+
+kafkaGuide('grupo-1', 'salidaGuias');
 
 app.use(router);
 app.use('/api', routes);

@@ -11,6 +11,7 @@ export enum status_guides {
   USER_NOY_FOUND = 6,
   DOCUMENTATION_ERROR = 7
 }
+
 /**
  * @swagger
  * components:
@@ -31,6 +32,8 @@ export enum status_guides {
  *           type: string
  *         notes_guide:
  *           type: string
+ *         observations_guide:
+ *           type: string
  *         other_cost_guide:
  *           type: number
  *         service_value_guide:
@@ -50,6 +53,7 @@ export enum status_guides {
  *         - status_guide
  *         - date_admission
  *         - notes_guide
+ *         - observations_guide
  *         - content_guide
  *         - units_in_guide
  *         - weight_in_guide
@@ -77,6 +81,7 @@ export interface GuideEntity {
   status_guide: status_guides;
   date_admission: Date;
   notes_guide: string;
+  observations_guide: string;
   content_guide: string;
   units_in_guide: number;
   weight_in_guide: number;
@@ -108,6 +113,8 @@ export interface GuideEntity {
  *           type: string
  *         notes_guide:
  *           type: string
+ *         observations_guide:
+ *           type: string
  *         other_cost_guide:
  *           type: number
  *         service_value_guide:
@@ -127,6 +134,7 @@ export interface GuideEntity {
  *         - status_guide
  *         - date_admission
  *         - notes_guide
+ *         - observations_guide
  *         - content_guide
  *         - units_in_guide
  *         - weight_in_guide
@@ -272,6 +280,8 @@ export interface GuideGenerationEntity {
  *           type: string
  *         notes_guide:
  *           type: string
+ *         observations_guide:
+ *           type: string
  *         origin_city:
  *           type: string
  *         origin_regional:
@@ -303,6 +313,7 @@ export interface GuideGenerationEntity {
  *         - status_guide
  *         - date_admission
  *         - notes_guide
+ *         - observations_guide
  *         - content_guide
  *         - origin_regional
  *         - units_in_guide
@@ -348,6 +359,7 @@ export interface GuideViewEntity {
   status_guide: status_guides;
   date_admission: Date;
   notes_guide: string;
+  observations_guide;
   content_guide: string;
   origin_regional: string;
   units_in_guide: number;

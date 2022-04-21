@@ -1,23 +1,13 @@
 version: '3.8'
 services:
-  envia-ms:
-    container_name: envia-ms
-    image: node:latest
+  app:
+    container_name: envia-ms-guide
     restart: always
     build: .
+    env_file: .env
     ports:
-      - ${PORT}:${PORT}
-    depends_on:
-      - postgres
-  db:
-    container_name: postgres
-    image: postgres
-    ports:
-      - '5433:${DB_PORT}'
-    volumes:
-      - ./postgres-data:/var/lib/postgresql/data
-      - ./db.sql:/docker-entrypoint-initdb.d/db.sql
+      - 5000:5000
     environment:
       - DATABASE_URL=${DATABASE_URL}
-      - FOLDER_PLANILLAS=${FOLDER_PLANILLAS}
-      - POSTGRES_HOST_AUTH_METHOD=trust
+      - NODE_ENV=${NODE_ENV}
+      - PORT=5000

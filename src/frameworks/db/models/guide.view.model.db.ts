@@ -19,6 +19,9 @@ export const guideViewModelDB = sequelize.define(
     notes_guide: {
       type: Sequelize.TEXT
     },
+    observations_guide: {
+      type: Sequelize.TEXT
+    },
     content_guide: {
       type: Sequelize.TEXT
     },

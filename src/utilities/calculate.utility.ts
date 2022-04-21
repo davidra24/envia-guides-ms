@@ -15,10 +15,10 @@ export const totalGuide = (
   other_cost_guide: number
 ) => {
   let total = BASE_VALUE;
-  total += weight_in_guide * 10;
-  total += volume_in_guide * 10;
-  total += weight_payment_guide * 10;
-  total += (declared_value_guide * 20) / 100;
+  total += weight_in_guide;
+  total += volume_in_guide;
+  total += weight_payment_guide;
+  total += (declared_value_guide * 5) / 100;
   total += service_value_guide;
   total += freight_guide;
   total += other_cost_guide;

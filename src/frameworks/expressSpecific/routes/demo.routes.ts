@@ -3,9 +3,9 @@ import { GuideTransactionController } from '../../../controllers';
 import { MockGuia } from '../../../__mocks__';
 import { errorResponseCommon, successResponseCommon } from '../../common';
 
-const guideController = new GuideTransactionController();
 /** Test - Generate Mocked guide */
 const router = Router();
+const guideTransactionController = new GuideTransactionController();
 
 /**
  * @swagger
@@ -31,7 +31,7 @@ const router = Router();
  */
 router.get('/', async (request: Request, response: Response) => {
   try {
-    const newGuide = await guideController.createGuide(MockGuia);
+    const newGuide = await guideTransactionController.createGuide(MockGuia);
     successResponseCommon(response, newGuide);
   } catch (error) {
     errorResponseCommon(response, error.message);

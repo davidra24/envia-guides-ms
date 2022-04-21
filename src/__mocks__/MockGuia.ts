@@ -6,6 +6,7 @@ export const MockGuia: GuideGenerationEntity = {
     status_guide: status_guides.CREATED,
     date_admission: new Date(),
     notes_guide: 'Pago en sucursal',
+    observations_guide: 'se daño la paqueteria',
     content_guide: 'Pantalla de computo',
     units_in_guide: 1,
     weight_in_guide: 5,
