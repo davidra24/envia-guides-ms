@@ -5,7 +5,16 @@ export const toRedableDate = (date: string) =>
 
 export const redableNow = () => toRedableDate(new Date().toISOString());
 
-export const dateToRedableString = (date: Date | string): string =>
+export const dateToFormat = (
+  date: Date | string,
+  stringFormat: string
+): string =>
   typeof date === 'string'
-    ? format(parseISO(date), 'dd/MM/yyyy')
-    : format(date, 'dd/MM/yyyy');
+    ? format(parseISO(date), stringFormat)
+    : format(date, stringFormat);
+
+export const dateForLog = (date: Date | string): string =>
+  dateToFormat(date, 'yyyyMMMdd');
+
+export const dateToRedableString = (date: Date | string): string =>
+  dateToFormat(date, 'dd/MM/yyyy');

@@ -24,7 +24,6 @@ export class ConnectionDB {
         }
       });
       await this.sequelize.authenticate();
-      console.log('Conected!');
       await this.createDatabase();
     } catch (error) {
       console.log(error);
@@ -35,8 +34,7 @@ export class ConnectionDB {
   createDatabase = async () => {
     const dir = path.join(__dirname, 'db.sql');
     const sql_string = fs.readFileSync(dir, 'utf8');
-    await this.sequelize.query(sql_string);
-    console.log('Database created');
+    return await this.sequelize.query(sql_string);
   };
 
   public static getInstance(): ConnectionDB {

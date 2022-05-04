@@ -5,6 +5,7 @@ CREATE TABLE IF NOT EXISTS GUIDES(
     status_guide NUMERIC,
     date_admission DATE,
     notes_guide TEXT,
+    observations_guide TEXT,
     content_guide TEXT,
     units_in_guide NUMERIC,
     weight_in_guide NUMERIC,
@@ -70,7 +71,7 @@ CREATE TABLE IF NOT EXISTS GUIDE_PERSON(
 	  REFERENCES PEOPLE(document_person)
 );
 
-CREATE OR REPLACE VIEW VIEW_GUIDE_PERSON AS SELECT g.id_guide, g.status_guide, g.date_admission, g.notes_guide, g.content_guide, g.units_in_guide, g.weight_in_guide, g.volume_in_guide, g.weight_payment_guide, g.declared_value_guide, g.service_value_guide, g.freight_guide, g.other_cost_guide,
+CREATE OR REPLACE VIEW VIEW_GUIDE_PERSON AS SELECT g.id_guide, g.status_guide, g.date_admission, g.notes_guide, g.observations_guide, g.content_guide, g.units_in_guide, g.weight_in_guide, g.volume_in_guide, g.weight_payment_guide, g.declared_value_guide, g.service_value_guide, g.freight_guide, g.other_cost_guide,
 	gp.origin_regional, gp.origin_city, gp.destination_city, gp.destination_regional, gp.address_addressee as address_addressee_in_guide,	gp.assigned_route,
 	gp.document_sender, send.first_name_person as first_name_sender, send.last_name_person as last_name_sender, send.address_person as address_sender, send.phone_person as phone_sender, send.postal_code_person as postal_code_sender,
 	gp.document_addressee, addr.first_name_person as first_name_addressee, addr.last_name_person as last_name_addressee, addr.address_person as address_addressee, addr.phone_person as phone_addressee, addr.postal_code_person as postal_code_addressee,

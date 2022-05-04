@@ -1,7 +1,7 @@
-import { v4 } from 'uuid';
-import { EventEntity, GuideEntity, status_guides } from '../../entities';
+import { Message } from 'kafkajs';
+import { GuideEntity } from '../../entities';
 import { guideRepository } from '../../frameworks';
-import { eventRepository } from '../../frameworks/repositories/event.repository';
+import { kafkaProducer } from '../../frameworks/expressSpecific/mq';
 
 export class GuideController {
   constructor() {}
@@ -32,7 +32,18 @@ export class GuideController {
   updateGuide = async (guide: GuideEntity, id_guide: string) => {
     try {
       const { updateGuideDB } = guideRepository;
-      return await updateGuideDB(guide, id_guide);
+      const guideUpdated = await updateGuideDB(guide, id_guide);
+      if (guideUpdated) {
+        const message: Array<Message> = [
+          {
+            value: JSON.stringify({
+              guides: { id: id_guide, status: guide.status_guide }
+            })
+          }
+        ];
+        kafkaProducer('guide-updated', message);
+      }
+      return guideUpdated;
     } catch (error) {
       console.log(error);
     }
