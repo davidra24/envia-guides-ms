@@ -1,7 +1,6 @@
 import { Kafka, Message } from 'kafkajs';
-import { EventController, GuideController } from '../../../controllers';
-import { generateEvent } from '../../../utilities/event.manager.utility';
-import { guideRepository } from '../../repositories';
+import { EventController, GuideController } from '../../controllers';
+import { generateEvent } from '../../utilities/event.manager.utility';
 
 export const kafka = new Kafka({
   clientId: 'envia-microservices',

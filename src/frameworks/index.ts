@@ -2,7 +2,7 @@ export * from './common';
 export * from './db';
 export * from './db/models';
 export * from './expressSpecific';
-export * from './expressSpecific/mq';
+export * from './mq';
 export * from './expressSpecific';
 export * from './common/logs/seqService.logs';
 export * from './common/logs/winston.logs';

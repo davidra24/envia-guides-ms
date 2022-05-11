@@ -1,7 +1,7 @@
 import { Message } from 'kafkajs';
 import { GuideEntity } from '../../entities';
 import { guideRepository } from '../../frameworks';
-import { kafkaProducer } from '../../frameworks/expressSpecific/mq';
+import { kafkaProducer } from '../../frameworks/mq';
 
 export class GuideController {
   constructor() {}
