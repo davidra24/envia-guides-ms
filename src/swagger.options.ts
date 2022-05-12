@@ -15,7 +15,7 @@ export const options: swaggerJSDoc.Options = {
     },
     servers: [
       {
-        url: 'https://envia-guide.herokuapp.com/api'
+        url: 'http://api404.eastus.cloudapp.azure.com:8000/api'
       }
     ]
   },

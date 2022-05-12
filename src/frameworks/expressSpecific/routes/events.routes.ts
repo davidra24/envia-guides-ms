@@ -42,7 +42,7 @@ router.post('/create', async (request: Request, response: Response) => {
 
 /**
  * @swagger
- * /event:
+ * /events:
  *  get:
  *    summary: Retorna la información de los eventos
  *    tags: ['Events']
@@ -68,7 +68,7 @@ router.get('/', async (request: Request, response: Response) => {
 
 /**
  * @swagger
- * /event/{id_event}:
+ * /events/{id_event}:
  *  get:
  *    summary: Retorna la información de los eventos
  *    tags: ['Events']
@@ -104,7 +104,7 @@ router.get('/:id_event', async (request: Request, response: Response) => {
 
 /**
  * @swagger
- * /event/{id_event}:
+ * /events/{id_event}:
  *  put:
  *    summary: Retorna la información de los eventos
  *    tags: ['Events']
@@ -146,7 +146,7 @@ router.put('/:id_event', async (request: Request, response: Response) => {
 
 /**
  * @swagger
- * /event/{id_event}:
+ * /events/{id_event}:
  *  delete:
  *    summary: Retorna la información de los eventos
  *    tags: ['Events']

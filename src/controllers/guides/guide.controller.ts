@@ -33,16 +33,6 @@ export class GuideController {
     try {
       const { updateGuideDB } = guideRepository;
       const guideUpdated = await updateGuideDB(guide, id_guide);
-      if (guideUpdated) {
-        const message: Array<Message> = [
-          {
-            value: JSON.stringify({
-              guides: { id: id_guide, status: guide.status_guide }
-            })
-          }
-        ];
-        kafkaProducer('guide-updated', message);
-      }
       return guideUpdated;
     } catch (error) {
       console.log(error);

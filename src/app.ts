@@ -6,7 +6,7 @@ import cors from 'cors';
 import { config } from 'dotenv';
 import { options as swaggerOptions } from './swagger.options';
 import { kafkaGuide } from './frameworks/mq';
-// import { ErrorHandler } from './frameworks/common/logs/errorHandler.logs';
+import { ErrorHandler } from './frameworks/common/logs/errorHandler.logs';
 
 config();
 
@@ -18,7 +18,6 @@ app.use(cors());
 app.use(express.json());
 app.use(express.text());
 app.use(express.urlencoded({ extended: false }));
-// app.use(ErrorHandler);
 
 router.get('/', (request: Request, response: Response) => {
   response.send('Hola mundo');
@@ -33,3 +32,5 @@ const specs = swaggerJSDoc(swaggerOptions);
 app.use('/docs', swaggerUI.serve, swaggerUI.setup(specs));
 
 app.listen(port);
+
+app.use(ErrorHandler);

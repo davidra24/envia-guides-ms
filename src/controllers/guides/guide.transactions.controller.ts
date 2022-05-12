@@ -1,5 +1,7 @@
+import { Message } from 'kafkajs';
 import { v4 } from 'uuid';
 import { GuideGenerationEntity, status_guides } from '../../entities';
+import { kafkaProducer } from '../../frameworks';
 import { U2B64 } from '../../utilities';
 import { generateEvent } from '../../utilities/event.manager.utility';
 import { EventController } from '../events/events.controller';
@@ -108,6 +110,17 @@ export class GuideTransactionController {
         { ...guide_person },
         id_guide
       );
+
+      const message: Array<Message> = [
+        {
+          value: JSON.stringify({
+            id: id_guide,
+            status: guide.status_guide,
+            assigned_route: guide_person.assigned_route
+          })
+        }
+      ];
+      kafkaProducer('assigned-route', message);
 
       if (pdf) return generatedPDF;
       else return updatedGuide;

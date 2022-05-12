@@ -5,6 +5,8 @@ import {
   GuideController,
   GuideTransactionController
 } from '../../../controllers';
+import { Message } from 'kafkajs';
+import { kafkaProducer } from '../../mq';
 
 const router = Router();
 
@@ -201,6 +203,15 @@ router.put('/:id_guide', async (request: Request, response: Response) => {
   } = request;
   try {
     const guides = await guideController.updateGuide(data, id_guide);
+    const message: Array<Message> = [
+      {
+        value: JSON.stringify({
+          id: id_guide,
+          status: data.status_guide
+        })
+      }
+    ];
+    kafkaProducer('guide-updated', message);
     successResponseCommon(response, guides);
   } catch (error) {
     console.log(error);
