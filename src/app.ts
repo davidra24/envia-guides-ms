@@ -1,7 +1,12 @@
 import express, { Router, Request, Response } from 'express';
-import { routes } from './frameworks/expressSpecific/routes';
-import { config } from 'dotenv';
+import routes from './frameworks/expressSpecific/routes';
+import swaggerUI from 'swagger-ui-express';
+import swaggerJSDoc from 'swagger-jsdoc';
 import cors from 'cors';
+import { config } from 'dotenv';
+import { options as swaggerOptions } from './swagger.options';
+import { kafkaGuide } from './frameworks/mq';
+import { ErrorHandler } from './frameworks/common/logs/errorHandler.logs';
 
 config();
 
@@ -18,7 +23,14 @@ router.get('/', (request: Request, response: Response) => {
   response.send('Hola mundo');
 });
 
+kafkaGuide('grupo-1', 'salidaGuias');
+
 app.use(router);
+app.use('/api', routes);
+
+const specs = swaggerJSDoc(swaggerOptions);
+app.use('/docs', swaggerUI.serve, swaggerUI.setup(specs));
+
 app.listen(port);
 
-routes(app);
+app.use(ErrorHandler);

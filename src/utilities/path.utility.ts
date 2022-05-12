@@ -5,3 +5,6 @@ export const documentPath = (fileName: string) =>
 
 export const imagePath = (fileName: string) =>
   path.join(__dirname, '..', 'img', `${fileName}.png`);
+
+export const logsPath = (fileName: string) =>
+  path.join(__dirname, '..', '..', 'logs', `${fileName}.log`);

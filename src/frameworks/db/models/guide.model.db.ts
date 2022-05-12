@@ -17,6 +17,9 @@ export const guideModelDB = sequelize.define('guides', {
   notes_guide: {
     type: Sequelize.TEXT
   },
+  observations_guide: {
+    type: Sequelize.TEXT
+  },
   content_guide: {
     type: Sequelize.TEXT
   },
@@ -43,5 +46,13 @@ export const guideModelDB = sequelize.define('guides', {
   },
   other_cost_guide: {
     type: Sequelize.NUMBER
+  },
+  createdAt: {
+    field: 'createdat',
+    type: Sequelize.DATE
+  },
+  updatedAt: {
+    field: 'updatedat',
+    type: Sequelize.DATE
   }
 });

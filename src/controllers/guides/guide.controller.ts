@@ -1,21 +1,49 @@
-import { GuideGenerationEntity } from '../../entities';
-import { guideRepository } from '../../frameworks/repositories';
-import { createGuideUseCase } from '../../useCases/guide/createGuia.useCase';
+import { Message } from 'kafkajs';
+import { GuideEntity } from '../../entities';
+import { guideRepository } from '../../frameworks';
+import { kafkaProducer } from '../../frameworks/mq';
 
 export class GuideController {
-  source = '';
-  fileName = '';
-  constructor(source: string, fileName: string) {
-    this.source = source;
-    this, (fileName = fileName);
-  }
-  createGuide = async (data: GuideGenerationEntity) => {
-    //TODO DATABASE
-    const { createGuideDB } = guideRepository;
-    const guidePDF = await createGuideUseCase({
-      sourceGuide: this.source,
-      guideCreation: data
-    });
-    return guidePDF;
+  constructor() {}
+  createGuide = async (guideEntity: GuideEntity) => {
+    try {
+      const { createGuideDB } = guideRepository;
+      return await createGuideDB({ ...guideEntity });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  getAllGuides = async () => {
+    try {
+      const { getAllGuidesDB } = guideRepository;
+      return await getAllGuidesDB();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  getOneGuide = async (id_guide: string) => {
+    try {
+      const { getOneGuideDB } = guideRepository;
+      return await getOneGuideDB(id_guide);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  updateGuide = async (guide: GuideEntity, id_guide: string) => {
+    try {
+      const { updateGuideDB } = guideRepository;
+      const guideUpdated = await updateGuideDB(guide, id_guide);
+      return guideUpdated;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  removeGuide = async (id_guide: string) => {
+    try {
+      const { removeGuideDB } = guideRepository;
+      return await removeGuideDB(id_guide);
+    } catch (error) {
+      console.log(error);
+    }
   };
 }
