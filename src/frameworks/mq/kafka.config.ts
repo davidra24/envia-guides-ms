@@ -2,9 +2,16 @@ import { Kafka, Message } from 'kafkajs';
 import { EventController, GuideController } from '../../controllers';
 import { generateEvent } from '../../utilities/event.manager.utility';
 
-export const kafka = new Kafka({
-  clientId: 'envia-microservices',
-  brokers: ['10.43.102.56:9093']
+const kafka = new Kafka({
+  clientId: 'envia-guides-ms',
+  brokers: [process.env.KAFKAHOST],
+  ssl: true,
+  logLevel: 2,
+  sasl: {
+    mechanism: 'plain',
+    username: process.env.KAFKAUSER,
+    password: process.env.KAFKAKEY
+  }
 });
 
 export const kafkaProducer = async (topic: string, messages: Message[]) => {
