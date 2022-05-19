@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   app:
-    container_name: envia-ms-guide
+    container_name: envia-guides-ms
     restart: always
     build: .
     env_file: .env
