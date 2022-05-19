@@ -6,7 +6,7 @@ import cors from 'cors';
 import { config } from 'dotenv';
 import { options as swaggerOptions } from './swagger.options';
 import { kafkaGuide } from './frameworks/mq';
-import { ErrorHandler } from './frameworks/common/logs/errorHandler.logs';
+import { ErrorHandler } from './frameworks/common/seq/errorHandler.seq';
 
 config();
 

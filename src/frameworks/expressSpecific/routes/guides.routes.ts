@@ -211,7 +211,7 @@ router.put('/:id_guide', async (request: Request, response: Response) => {
         })
       }
     ];
-    kafkaProducer('guide-updated', message);
+    await kafkaProducer('guide-updated', message);
     successResponseCommon(response, guides);
   } catch (error) {
     console.log(error);
