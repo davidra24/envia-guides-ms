@@ -1,13 +1,18 @@
 version: '3.8'
 services:
   app:
-    container_name: envia-ms-guide
+    container_name: envia-guides-ms
     restart: always
     build: .
-    env_file: .env
     ports:
       - 5000:5000
     environment:
-      - DATABASE_URL=${DATABASE_URL}
-      - NODE_ENV=${NODE_ENV}
+      - DATABASE_URL=postgres://bjxaokjeuimkyo:c264583623edfbb75250dd76e16813b2e5fd7ea901c88efbb6649bd912db1117@ec2-52-71-69-66.compute-1.amazonaws.com:5432/dacn84fhb3spob
+      - NODE_ENV=production
       - PORT=5000
+      - DB_PORT=5433
+      - KAFKAHOST=pkc-419q3.us-east4.gcp.confluent.cloud:9092
+      - KAFKAUSER=KB5WZ5H5NCCHY5GS
+      - KAFKAKEY=7vCbYaWev/ihq92d0w4kRnk+/i2Q2DuYzDpkH82FJU+S9DAuBiIUm5jj1wEIX7DE
+      - SEQ_SERVICE=http://34.132.151.243/
+      - SEQ_API_KEY=tXITai739rmD7A816blI

@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: envia-guides-ms
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: envia-guides-ms
+  template:
+    metadata:
+      labels:
+        app: envia-guides-ms
+    spec:
+      containers:
+        - image: gcr.io/august-creek-346600/envia-guides-ms:latest
+          name: app
+          ports:
+            - containerPort: 80
+              name: http
+              protocol: TCP
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: envia-guides-ms
+spec:
+  ports:
+    - name: http
+      port: 8080
+  selector:
+    app: envia-guides-ms

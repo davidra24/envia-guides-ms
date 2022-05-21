@@ -120,7 +120,8 @@ export class GuideTransactionController {
           })
         }
       ];
-      kafkaProducer('assigned-route', message);
+
+      await kafkaProducer('assigned-route', message);
 
       if (pdf) return generatedPDF;
       else return updatedGuide;

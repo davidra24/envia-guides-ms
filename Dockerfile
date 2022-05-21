@@ -11,5 +11,5 @@ RUN yarn build
 
 COPY ["./src/frameworks/db/db.sql", "/usr/src/dist/frameworks/db/"]
 
-CMD ["pm2-runtime", "/usr/src/dist/app.js"]
+CMD ["yarn", "start"]
 EXPOSE 5000

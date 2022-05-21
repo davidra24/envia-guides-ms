@@ -4,6 +4,6 @@ export * from './db/models';
 export * from './expressSpecific';
 export * from './mq';
 export * from './expressSpecific';
-export * from './common/logs/seqService.logs';
-export * from './common/logs/winston.logs';
+export * from './common/seq/seqService.seq';
+export * from './common/seq/winston.seq';
 export * from './repositories';
