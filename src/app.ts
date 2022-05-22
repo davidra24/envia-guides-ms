@@ -20,7 +20,7 @@ app.use(express.text());
 app.use(express.urlencoded({ extended: false }));
 
 router.get('/', (request: Request, response: Response) => {
-  response.send('Hola mundo');
+  response.send('Ok');
 });
 
 kafkaGuide('grupo-1', 'salidaGuias');

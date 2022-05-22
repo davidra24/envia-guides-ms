@@ -8,15 +8,16 @@
 # documentación.
 
 name: Build and Deploy to GKE
-
+      
 on:
-  push:
-    branches:
-      - develop
+  workflow_run:
+    workflows: ["Node.js Test"]
+    types:
+      - completed
 
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
-  GKE_CLUSTER: envia-dev-cluster-1    # Add your cluster name here.
+  GKE_CLUSTER: envia-cluster-1    # Add your cluster name here.
   GKE_ZONE: us-central1   # Add your cluster zone here.
   DEPLOYMENT_NAME: envia-guides-ms # Add your deployment name here.
   IMAGE: envia-guides-ms
