@@ -123,6 +123,6 @@ export const createPDFGuideController = async ({
     }
     return await fillPDF.saveDocument();
   } catch (error) {
-    console.log(error);
+    throw error;
   }
 };

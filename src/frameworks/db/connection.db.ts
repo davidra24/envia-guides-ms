@@ -21,12 +21,13 @@ export class ConnectionDB {
           ssl: {
             rejectUnauthorized: false
           }
-        }
+        },
+        logging: false
       });
       await this.sequelize.authenticate();
       await this.createDatabase();
     } catch (error) {
-      console.log(error);
+      throw error;
     }
     config();
   };

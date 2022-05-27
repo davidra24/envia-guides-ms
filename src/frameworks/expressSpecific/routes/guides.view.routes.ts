@@ -1,6 +1,7 @@
 import { Router, Response, Request, query } from 'express';
 import { errorResponseCommon, successResponseCommon } from '../../common';
 import { GuideViewController } from '../../../controllers/guides/guideView.controller';
+import { LogHandler } from '../../common/seq/logHandler.seq';
 
 const router = Router();
 
@@ -35,12 +36,14 @@ router.get('/', async (request: Request, response: Response) => {
     let guides = null;
     if (status) {
       guides = await guideViewController.getAllGuidesByStatus(Number(status));
+      LogHandler(200, request);
     } else {
       guides = await guideViewController.getAllGuides();
+      LogHandler(200, request);
     }
     successResponseCommon(response, guides);
   } catch (error) {
-    console.log(error);
+    LogHandler(500, request, error.message);
     errorResponseCommon(response, error.message);
   }
 });
@@ -85,12 +88,14 @@ router.get('/:id_guide', async (request: Request, response: Response) => {
     let guide = null;
     if (pdf === 'true') {
       guide = await guideViewController.getOneGuidePDF(id_guide);
+      LogHandler(200, request);
     } else {
       guide = await guideViewController.getOneGuide(id_guide);
+      LogHandler(200, request);
     }
     successResponseCommon(response, guide);
   } catch (error) {
-    console.log(error);
+    LogHandler(500, request, error.message);
     errorResponseCommon(response, error.message);
   }
 });

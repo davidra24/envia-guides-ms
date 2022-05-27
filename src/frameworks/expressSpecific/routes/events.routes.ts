@@ -1,6 +1,8 @@
 import { Router, Response, Request } from 'express';
 import { EventController } from '../../../controllers';
 import { errorResponseCommon, successResponseCommon } from '../../common';
+import { LogHandler } from '../../common/seq/logHandler.seq';
+import { logger } from '../../common/seq/winston.seq';
 
 const eventController = new EventController();
 
@@ -34,9 +36,10 @@ router.post('/create', async (request: Request, response: Response) => {
   try {
     const eventeCreated = await eventController.createEvent(data);
     successResponseCommon(response, eventeCreated);
+    LogHandler(201, request);
   } catch (error) {
-    console.log(error);
     errorResponseCommon(response, error.message);
+    LogHandler(500, request, error.message);
   }
 });
 
@@ -59,9 +62,10 @@ router.post('/create', async (request: Request, response: Response) => {
 router.get('/', async (request: Request, response: Response) => {
   try {
     const people = await eventController.getAllEvents();
+    LogHandler(200, request);
     successResponseCommon(response, people);
   } catch (error) {
-    console.log(error);
+    LogHandler(500, request, error.message);
     errorResponseCommon(response, error.message);
   }
 });
@@ -95,9 +99,10 @@ router.get('/:id_event', async (request: Request, response: Response) => {
   } = request;
   try {
     const event = await eventController.getOneEvent(id_event);
+    LogHandler(200, request);
     successResponseCommon(response, event);
   } catch (error) {
-    console.log(error);
+    LogHandler(500, request, error.message);
     errorResponseCommon(response, error.message);
   }
 });
@@ -137,9 +142,10 @@ router.put('/:id_event', async (request: Request, response: Response) => {
   } = request;
   try {
     const event = await eventController.updateEvent(data, id_event);
+    LogHandler(200, request);
     successResponseCommon(response, event);
   } catch (error) {
-    console.log(error);
+    LogHandler(500, request, error.message);
     errorResponseCommon(response, error.message);
   }
 });
@@ -172,9 +178,10 @@ router.delete('/:id_event', async (request: Request, response: Response) => {
   } = request;
   try {
     const guides = await eventController.removeEvent(id_event);
+    LogHandler(200, request);
     successResponseCommon(response, guides);
   } catch (error) {
-    console.log(error);
+    LogHandler(500, request, error.message);
     errorResponseCommon(response, error.message);
   }
 });

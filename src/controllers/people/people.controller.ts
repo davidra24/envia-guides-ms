@@ -14,35 +14,35 @@ export class PeopleController {
     try {
       return createPersonDB({ ...personEntity });
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   };
   getAllPersons = async () => {
     try {
       return await getAllPersonsDB();
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   };
   getOnePerson = async (document_person: string) => {
     try {
       return await getOnePersonDB(document_person);
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   };
   updatePerson = async (person: PersonEntity, document_person: string) => {
     try {
       return await updatePersonDB(person, document_person);
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   };
   removePerson = async (document_person: string) => {
     try {
       return await removePersonDB(document_person);
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   };
   addFindingExistent = async (
@@ -52,7 +52,7 @@ export class PeopleController {
     try {
       return await addFindingExistentDB(person, document_person);
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   };
 }

@@ -1,6 +1,7 @@
 import { Router, Response, Request } from 'express';
 import { GuidePersonController } from '../../../controllers';
 import { errorResponseCommon, successResponseCommon } from '../../common';
+import { LogHandler } from '../../common/seq/logHandler.seq';
 
 const guidePersonController = new GuidePersonController();
 
@@ -33,9 +34,10 @@ router.post('/create', async (request: Request, response: Response) => {
   } = request;
   try {
     const guidePerson = await guidePersonController.createGuidePerson(data);
+    LogHandler(201, request);
     successResponseCommon(response, guidePerson);
   } catch (error) {
-    console.log(error);
+    LogHandler(500, request, error.message);
     errorResponseCommon(response, error.message);
   }
 });
@@ -59,9 +61,10 @@ router.post('/create', async (request: Request, response: Response) => {
 router.get('/', async (request: Request, response: Response) => {
   try {
     const guidesPerson = await guidePersonController.getAllGuidePersons();
+    LogHandler(200, request);
     successResponseCommon(response, guidesPerson);
   } catch (error) {
-    console.log(error);
+    LogHandler(500, request, error.message);
     errorResponseCommon(response, error.message);
   }
 });
@@ -97,9 +100,10 @@ router.get('/:id_guide', async (request: Request, response: Response) => {
     const guidesPerson = await guidePersonController.getOneGuidePerson(
       id_guide
     );
+    LogHandler(200, request);
     successResponseCommon(response, guidesPerson);
   } catch (error) {
-    console.log(error);
+    LogHandler(500, request, error.message);
     errorResponseCommon(response, error.message);
   }
 });
@@ -134,9 +138,10 @@ router.delete('/:id_guide', async (request: Request, response: Response) => {
     const guidesPerson = await guidePersonController.removeGuidePerson(
       id_guide
     );
+    LogHandler(200, request);
     successResponseCommon(response, guidesPerson);
   } catch (error) {
-    console.log(error);
+    LogHandler(500, request, error.message);
     errorResponseCommon(response, error.message);
   }
 });
@@ -179,9 +184,10 @@ router.put('/:id_guide', async (request: Request, response: Response) => {
       data,
       id_guide
     );
+    LogHandler(200, request);
     successResponseCommon(response, guidesPerson);
   } catch (error) {
-    console.log(error);
+    LogHandler(500, request, error.message);
     errorResponseCommon(response, error.message);
   }
 });

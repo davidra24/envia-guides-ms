@@ -10,7 +10,7 @@ export class GuideController {
       const { createGuideDB } = guideRepository;
       return await createGuideDB({ ...guideEntity });
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   };
   getAllGuides = async () => {
@@ -18,7 +18,7 @@ export class GuideController {
       const { getAllGuidesDB } = guideRepository;
       return await getAllGuidesDB();
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   };
   getOneGuide = async (id_guide: string) => {
@@ -26,7 +26,7 @@ export class GuideController {
       const { getOneGuideDB } = guideRepository;
       return await getOneGuideDB(id_guide);
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   };
   updateGuide = async (guide: GuideEntity, id_guide: string) => {
@@ -35,7 +35,7 @@ export class GuideController {
       const guideUpdated = await updateGuideDB(guide, id_guide);
       return guideUpdated;
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   };
   removeGuide = async (id_guide: string) => {
@@ -43,7 +43,7 @@ export class GuideController {
       const { removeGuideDB } = guideRepository;
       return await removeGuideDB(id_guide);
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   };
 }

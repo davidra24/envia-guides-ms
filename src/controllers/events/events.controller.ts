@@ -8,7 +8,7 @@ export class EventController {
       const { createEventDB } = eventRepository;
       return createEventDB({ ...eventEntity });
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   };
   getAllEvents = async () => {
@@ -16,7 +16,7 @@ export class EventController {
       const { getAllEventsDB } = eventRepository;
       return await getAllEventsDB();
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   };
   getOneEvent = async (id_event: string) => {
@@ -24,7 +24,7 @@ export class EventController {
       const { getOneEventDB } = eventRepository;
       return await getOneEventDB(id_event);
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   };
   getManyEventsByIdGuide = async (id_guide: string) => {
@@ -32,7 +32,7 @@ export class EventController {
       const { getManyEventsByIdGuideDB } = eventRepository;
       return await getManyEventsByIdGuideDB(id_guide);
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   };
   updateEvent = async (event: EventEntity, id_event: string) => {
@@ -40,7 +40,7 @@ export class EventController {
       const { updateEventDB } = eventRepository;
       return await updateEventDB(event, id_event);
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   };
   removeEvent = async (id_event: string) => {
@@ -48,7 +48,7 @@ export class EventController {
       const { removeEventDB } = eventRepository;
       return await removeEventDB(id_event);
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   };
 }

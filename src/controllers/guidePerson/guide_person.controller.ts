@@ -8,7 +8,7 @@ export class GuidePersonController {
       const { createGuidePersonDB } = guidePersonRepository;
       return createGuidePersonDB({ ...guidePersonEntity });
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   };
   getAllGuidePersons = async () => {
@@ -16,7 +16,7 @@ export class GuidePersonController {
       const { getAllGuidePersonsDB } = guidePersonRepository;
       return await getAllGuidePersonsDB();
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   };
   getOneGuidePerson = async (id_guide: string) => {
@@ -24,7 +24,7 @@ export class GuidePersonController {
       const { getOneGuidePersonDB } = guidePersonRepository;
       return await getOneGuidePersonDB(id_guide);
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   };
   updateGuidePerson = async (
@@ -35,7 +35,7 @@ export class GuidePersonController {
       const { updateGuidePersonDB } = guidePersonRepository;
       return await updateGuidePersonDB(guidePerson, id_guide);
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   };
   removeGuidePerson = async (id_guide: string) => {
@@ -43,7 +43,7 @@ export class GuidePersonController {
       const { removeGuidePersonDB } = guidePersonRepository;
       return await removeGuidePersonDB(id_guide);
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   };
 }

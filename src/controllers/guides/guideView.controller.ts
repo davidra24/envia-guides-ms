@@ -11,7 +11,7 @@ export class GuideViewController {
       const allguideview = await getAllGuideViewsDB();
       return allguideview;
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   };
   getAllGuidesByStatus = async (status_guide: number) => {
@@ -20,7 +20,7 @@ export class GuideViewController {
       const allguideview = await getAllGuidesByStatusDB(status_guide);
       return allguideview;
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   };
   getOneGuide = async (id_guide: string) => {
@@ -28,7 +28,7 @@ export class GuideViewController {
       const { getOneGuideViewDB } = guideViewRepository;
       return await getOneGuideViewDB(id_guide);
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   };
   getOneGuidePDF = async (id_guide: string) => {
@@ -43,7 +43,7 @@ export class GuideViewController {
       });
       return U2B64(generatedPDF);
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   };
 }

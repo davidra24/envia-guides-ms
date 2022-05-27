@@ -3,10 +3,11 @@ import { SeqService } from './seqService.seq';
 
 const options = {
   console: {
-    level: 'info',
+    level: 'error',
     handleExceptions: true,
     json: true,
-    colorize: true
+    colorize: true,
+    format: winston.format.simple()
   }
 };
 

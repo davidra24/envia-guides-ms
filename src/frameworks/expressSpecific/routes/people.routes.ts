@@ -1,6 +1,7 @@
 import { Router, Response, Request } from 'express';
 import { PeopleController } from '../../../controllers';
 import { errorResponseCommon, successResponseCommon } from '../../common';
+import { LogHandler } from '../../common/seq/logHandler.seq';
 
 const peopleController = new PeopleController();
 
@@ -33,9 +34,10 @@ router.post('/create', async (request: Request, response: Response) => {
   } = request;
   try {
     const personCreated = await peopleController.createPerson(data);
+    LogHandler(201, request);
     successResponseCommon(response, personCreated);
   } catch (error) {
-    console.log(error);
+    LogHandler(500, request, error.message);
     errorResponseCommon(response, error.message);
   }
 });
@@ -59,9 +61,10 @@ router.post('/create', async (request: Request, response: Response) => {
 router.get('/', async (request: Request, response: Response) => {
   try {
     const people = await peopleController.getAllPersons();
+    LogHandler(200, request);
     successResponseCommon(response, people);
   } catch (error) {
-    console.log(error);
+    LogHandler(500, request, error.message);
     errorResponseCommon(response, error.message);
   }
 });
@@ -97,9 +100,10 @@ router.get(
     } = request;
     try {
       const person = await peopleController.getOnePerson(document_person);
+      LogHandler(200, request);
       successResponseCommon(response, person);
     } catch (error) {
-      console.log(error);
+      LogHandler(500, request, error.message);
       errorResponseCommon(response, error.message);
     }
   }
@@ -143,9 +147,10 @@ router.put(
     } = request;
     try {
       const person = await peopleController.updatePerson(data, document_person);
+      LogHandler(200, request);
       successResponseCommon(response, person);
     } catch (error) {
-      console.log(error);
+      LogHandler(500, request, error.message);
       errorResponseCommon(response, error.message);
     }
   }
@@ -181,9 +186,10 @@ router.delete(
     } = request;
     try {
       const guides = await peopleController.removePerson(document_person);
+      LogHandler(200, request);
       successResponseCommon(response, guides);
     } catch (error) {
-      console.log(error);
+      LogHandler(500, request, error.message);
       errorResponseCommon(response, error.message);
     }
   }

@@ -2,6 +2,7 @@ import { Router, Response, Request } from 'express';
 import { GuideTransactionController } from '../../../controllers';
 import { MockGuia } from '../../../__mocks__';
 import { errorResponseCommon, successResponseCommon } from '../../common';
+import { LogHandler } from '../../common/seq/logHandler.seq';
 
 /** Test - Generate Mocked guide */
 const router = Router();
@@ -32,8 +33,10 @@ const guideTransactionController = new GuideTransactionController();
 router.get('/', async (request: Request, response: Response) => {
   try {
     const newGuide = await guideTransactionController.createGuide(MockGuia);
+    LogHandler(201, request);
     successResponseCommon(response, newGuide);
   } catch (error) {
+    LogHandler(500, request, error.message);
     errorResponseCommon(response, error.message);
   }
 });

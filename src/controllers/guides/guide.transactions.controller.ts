@@ -23,6 +23,7 @@ export class GuideTransactionController {
     this.peopleController = new PeopleController();
     this.guidePersonController = new GuidePersonController();
   }
+
   createGuide = async (data: GuideGenerationEntity) => {
     try {
       const id_guide = data.id ? data.id : v4();
@@ -59,10 +60,10 @@ export class GuideTransactionController {
 
       return generatedPDF;
     } catch (error) {
-      console.log(error);
-      return null;
+      throw error;
     }
   };
+
   updateGuide = async ({
     id_guide,
     data,
@@ -126,8 +127,7 @@ export class GuideTransactionController {
       if (pdf) return generatedPDF;
       else return updatedGuide;
     } catch (error) {
-      console.log(error);
-      return null;
+      throw error;
     }
   };
   getAllGuides = async () => await this.guideController.getAllGuides();

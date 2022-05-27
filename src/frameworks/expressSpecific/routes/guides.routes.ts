@@ -7,6 +7,7 @@ import {
 } from '../../../controllers';
 import { Message } from 'kafkajs';
 import { kafkaProducer } from '../../mq';
+import { LogHandler } from '../../common/seq/logHandler.seq';
 
 const router = Router();
 
@@ -40,9 +41,10 @@ router.post('/create', async (request: Request, response: Response) => {
   } = request;
   try {
     const guide = await guideTransactionController.createGuide(data);
+    LogHandler(201, request);
     successResponseCommon<string>(response, guide, HTTP_201_CREATED);
   } catch (error) {
-    console.log(error);
+    LogHandler(500, request, error.message);
     errorResponseCommon(response, error.message);
   }
 });
@@ -66,9 +68,10 @@ router.post('/create', async (request: Request, response: Response) => {
 router.get('/', async (request: Request, response: Response) => {
   try {
     const guides = await guideController.getAllGuides();
+    LogHandler(200, request);
     successResponseCommon(response, guides);
   } catch (error) {
-    console.log(error);
+    LogHandler(500, request, error.message);
     errorResponseCommon(response, error.message);
   }
 });
@@ -104,9 +107,10 @@ router.get('/:id_guide', async (request: Request, response: Response) => {
   } = request;
   try {
     const guides = await guideController.getOneGuide(id_guide);
+    LogHandler(200, request);
     successResponseCommon(response, guides);
   } catch (error) {
-    console.log(error);
+    LogHandler(500, request, error.message);
     errorResponseCommon(response, error.message);
   }
 });
@@ -158,9 +162,10 @@ router.put('/pdf/:id_guide', async (request: Request, response: Response) => {
       data,
       pdf: pdf === 'true'
     });
+    LogHandler(200, request);
     successResponseCommon(response, guide);
   } catch (error) {
-    console.log(error);
+    LogHandler(500, request, error.message);
     errorResponseCommon(response, error.message);
   }
 });
@@ -212,9 +217,10 @@ router.put('/:id_guide', async (request: Request, response: Response) => {
       }
     ];
     await kafkaProducer('guide-updated', message);
+    LogHandler(200, request);
     successResponseCommon(response, guides);
   } catch (error) {
-    console.log(error);
+    LogHandler(500, request, error.message);
     errorResponseCommon(response, error.message);
   }
 });
@@ -249,9 +255,10 @@ router.delete(
     } = request;
     try {
       const guides = await guideController.removeGuide(id_guide);
+      LogHandler(200, request);
       successResponseCommon(response, guides);
     } catch (error) {
-      console.log(error);
+      LogHandler(500, request, error.message);
       errorResponseCommon(response, error.message);
     }
   }
