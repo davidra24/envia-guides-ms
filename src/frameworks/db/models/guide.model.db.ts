@@ -1,7 +1,7 @@
 import Sequelize from 'sequelize';
 import { ConnectionDB } from '../connection.db';
 
-const sequelize = ConnectionDB.getInstance().getSequelize();
+const sequelize = new ConnectionDB().getSequelize();
 
 export const guideModelDB = sequelize.define('guides', {
   id_guide: {
