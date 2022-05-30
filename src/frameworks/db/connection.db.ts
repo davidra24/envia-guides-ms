@@ -10,9 +10,7 @@ export class ConnectionDB {
   private sequelize: Sequelize;
   private CONNECTION = process.env.DATABASE_URL;
 
-  private constructor() {
-    this.connectDB();
-  }
+  private constructor() {}
 
   connectDB = async () => {
     try {
@@ -42,6 +40,7 @@ export class ConnectionDB {
     if (ConnectionDB.instance === null) {
       ConnectionDB.instance = new ConnectionDB();
     }
+    ConnectionDB.instance.connectDB();
     return ConnectionDB.instance;
   }
 
