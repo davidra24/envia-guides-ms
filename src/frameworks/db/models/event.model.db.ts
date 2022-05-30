@@ -1,7 +1,7 @@
 import Sequelize from 'sequelize';
 import { ConnectionDB } from '../connection.db';
 
-const sequelize = ConnectionDB.getInstance().getSequelize();
+const sequelize = new ConnectionDB().getSequelize();
 
 export const eventModelDB = sequelize.define('events', {
   id_event: {

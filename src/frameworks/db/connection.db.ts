@@ -10,7 +10,9 @@ export class ConnectionDB {
   private sequelize: Sequelize;
   private CONNECTION = process.env.DATABASE_URL;
 
-  private constructor() {}
+  constructor() {
+    this.connectDB();
+  }
 
   connectDB = async () => {
     try {
@@ -25,6 +27,8 @@ export class ConnectionDB {
       await this.sequelize.authenticate();
       // await this.createDatabase();
     } catch (error) {
+      console.log(error);
+
       throw error;
     }
     config();
