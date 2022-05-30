@@ -15,6 +15,7 @@ ENV SEQ_SERVICE=http://34.132.151.243/
 ENV SEQ_API_KEY=tXITai739rmD7A816blI
 
 RUN npm install
+RUN npm install tsc -g
 RUN npm run build
 
 COPY ["./src/frameworks/db/db.sql", "/usr/src/dist/frameworks/db/"]
