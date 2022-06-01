@@ -25,7 +25,7 @@ export class ConnectionDB {
         logging: false
       });
       await this.sequelize.authenticate();
-      // await this.createDatabase();
+      await this.createDatabase();
     } catch (error) {
       console.log(error);
 
