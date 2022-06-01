@@ -32,13 +32,16 @@ const guideViewController = new GuideViewController();
  */
 router.get('/', async (request: Request, response: Response) => {
   try {
-    const { status } = request.query;
+    const { status, limit } = request.query;
     let guides = null;
     if (status) {
-      guides = await guideViewController.getAllGuidesByStatus(Number(status));
+      guides = await guideViewController.getAllGuidesByStatus(
+        Number(status),
+        Number(limit)
+      );
       LogHandler(200, request);
     } else {
-      guides = await guideViewController.getAllGuides();
+      guides = await guideViewController.getAllGuides(Number(limit));
       LogHandler(200, request);
     }
     successResponseCommon(response, guides);

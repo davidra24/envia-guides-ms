@@ -5,19 +5,19 @@ import { createPDFGuideController } from './guidePDFController';
 
 export class GuideViewController {
   constructor() {}
-  getAllGuides = async () => {
+  getAllGuides = async (limit: number) => {
     try {
       const { getAllGuideViewsDB } = guideViewRepository;
-      const allguideview = await getAllGuideViewsDB();
+      const allguideview = await getAllGuideViewsDB(limit);
       return allguideview;
     } catch (error) {
       throw error;
     }
   };
-  getAllGuidesByStatus = async (status_guide: number) => {
+  getAllGuidesByStatus = async (status_guide: number, limit: number) => {
     try {
       const { getAllGuidesByStatusDB } = guideViewRepository;
-      const allguideview = await getAllGuidesByStatusDB(status_guide);
+      const allguideview = await getAllGuidesByStatusDB(status_guide, limit);
       return allguideview;
     } catch (error) {
       throw error;
