@@ -3,7 +3,7 @@ import { ConnectionDB } from '../connection.db';
 import { guideModelDB } from './guide.model.db';
 import { personModelDB } from './person.model.db';
 
-const sequelize = new ConnectionDB().getSequelize();
+const sequelize = ConnectionDB.getInstance().getSequelize();
 
 export const guidePersonModelDB = sequelize.define(
   'guide_person',

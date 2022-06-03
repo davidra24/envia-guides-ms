@@ -42,7 +42,7 @@ router.post('/create', async (request: Request, response: Response) => {
   try {
     const guide = await guideTransactionController.createGuide(data);
     LogHandler(201, request);
-    successResponseCommon<string>(response, guide, HTTP_201_CREATED);
+    successResponseCommon<any>(response, guide, HTTP_201_CREATED);
   } catch (error) {
     LogHandler(500, request, error.message);
     errorResponseCommon(response, error.message);

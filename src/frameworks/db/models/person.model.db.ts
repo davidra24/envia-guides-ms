@@ -1,7 +1,7 @@
 import Sequelize from 'sequelize';
 import { ConnectionDB } from '../connection.db';
 
-const sequelize = new ConnectionDB().getSequelize();
+const sequelize = ConnectionDB.getInstance().getSequelize();
 
 export const personModelDB = sequelize.define('people', {
   document_person: {
