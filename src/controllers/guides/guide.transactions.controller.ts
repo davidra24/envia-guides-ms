@@ -27,15 +27,15 @@ export class GuideTransactionController {
   createGuide = async (data: GuideGenerationEntity) => {
     try {
       const id_guide = data.id ? data.id : v4();
-      /* let generatedPDF: Uint8Array | string = await createPDFGuideController({
+      let generatedPDF: Uint8Array | string = await createPDFGuideController({
         sourceGuide: GUIA_NAME,
         guideCreation: { ...data, id: id_guide }
       });
-      generatedPDF = U2B64(generatedPDF); */
+      generatedPDF = U2B64(generatedPDF);
 
       const { guide, sender, addressee, guide_person } = data;
 
-      const new_guide = await this.guideController.createGuide({
+      await this.guideController.createGuide({
         ...guide,
         id_guide
       });
@@ -61,7 +61,7 @@ export class GuideTransactionController {
         id_guide
       });
 
-      return new_guide;
+      return generatedPDF;
     } catch (error) {
       throw error;
     }
